@@ -156,4 +156,21 @@ Utiliza un DFS para resolver el problema.
         
 ### **P y NP**
 
+*Vertex Cover*
+
+    Problema: dado un grafo G = (V,E), con |V| = n y |E| = m, encontrar el conjunto
+    mínimo de vértices que cubre cada arista del grafo G.
+    
+    Es un problema de complejidad NP-Hard.
+    
+*Set Cover*
+
+    Problema: Dado un conjunto U de m elementos, una colección S = {S1,...Sn} donde
+    Si es subconjunto de U, seleccionar el mínimo número de subconjuntos tales que 
+    su unión es igual a U. 
+    
+    Es un problema de complejidad NP-Hard.
+    
+Vertex Cover es un caso especial del problema Set Cover. 
+
     
