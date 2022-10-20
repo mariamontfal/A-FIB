@@ -178,3 +178,30 @@ Vertex Cover es un caso especial del problema Set Cover.
 *Master Theorem*
 
 ![Master Theorem](https://i.stack.imgur.com/iW9q1.png)
+
+*Selección*
+
+    Problema: dado un array A de n claves distintas desordenadas, y i perteneciente
+    a {1..n}, selecciona el iésimo elemento más pequeño en A tal que su clave es más
+    grande que i-1 claves en A. 
+
+1) Solución 1 
+
+    - Ordenar el array en tiempo n*log n
+    - Devolver el iésemo elemento A[i]
+
+2) Solución 2
+    
+    *Pseudocódigo*:
+        1. Escoger un elemento de partición x
+        2. Sea k el rank de x, 
+            2.1 Si k==i hemos encontrado el iésimo elemento
+            2.2 Si no, utilizar x para determinar una partición de A
+                2.2.1 Si i<k llamar recursivamente con la parte izquierda
+                2.2.2 Si no, llamar recursivamente con la parte derecha
+                
+    El tiempo dependerá de cómo de bien se escoja el elemento de partición. 
+    
+    Típicamente se divide el array A en elementos de 5 para encontrar la mediana
+    de medianas. 
+        
