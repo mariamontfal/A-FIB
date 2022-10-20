@@ -190,9 +190,12 @@ Vertex Cover es un caso especial del problema Set Cover.
     - Ordenar el array en tiempo n*log n
     - Devolver el iésemo elemento A[i]
 
+Coste de la solución: O(n*log n)
+
 2) Solución 2
     
     *Pseudocódigo*:
+    
         1. Escoger un elemento de partición x
         2. Sea k el rank de x, 
             2.1 Si k==i hemos encontrado el iésimo elemento
@@ -204,4 +207,6 @@ Vertex Cover es un caso especial del problema Set Cover.
     
     Típicamente se divide el array A en elementos de 5 para encontrar la mediana
     de medianas. 
+    
+    Coste de la solución: O(n)
         
