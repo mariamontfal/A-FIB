@@ -173,4 +173,8 @@ Utiliza un DFS para resolver el problema.
     
 Vertex Cover es un caso especial del problema Set Cover. 
 
-    
+### **Divide y vencerás**
+
+*Master Theorem*
+
+![Master Theorem](https://i.stack.imgur.com/iW9q1.png)
