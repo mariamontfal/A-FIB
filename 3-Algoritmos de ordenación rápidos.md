@@ -61,13 +61,46 @@ Los valores a ordenar están en el ranfo [0, 2^d].
     
 Coste del algoritmo: T(n,d,b) = Θ(d (n + b)) donde n = números, d = dígitos y b = base.
 
+Hay que *tunear* los parámetros para que el coste sea lineal:
+    1. Escoger un entero e tal que 1 < e < d
+    2. d´= ⌈d/e⌉
+    3. b´= 2^e
+
 ### **Bucket Sort:** 
 
+Considera que los elementos a ordenar están en el rango [0,...,m-1]
 
+El algoritmo empieza con m cubos vacíos numerados del 0 al m-1
 
+Lee la lista y coloca el elemento s[i] en el cubo s[i]
 
-*Pseudocódigo*
+Imprime los elementos en orden
 
+No hay comparaciones
+
+*Complejidad*
+
+    - Inicialización de los cubos: O(m)
+    - Del array a los cubos: O(n)
+    - De los cubos al array: O(m+n)
+    - Coste total: O(n+m)
     
-Coste del algoritmo: O(n)
+Cuando la m es pequeña comparada con la n, bucket sort es lineal.
+
+Si los cubos tienen elementos diferentes, tendríamos que tener en cuenta el coste de ordenar los cubos. En caso medio el coste seguiría siendo lineal, pero en caso peor sería O(n*log n). 
+
+
+### **Upper and lower bounds:** 
+
+*Upper bound:*
+
+Un problema tiene un límite por encima si existe un algoritmo que para cualquier input x de tamaño n, el algoritmo consigue una respuesta correcta en como mucho <= T(n) pasos.
+        
+        ∃A,∀x tA(x) ≤ T(|x|)
+
+*Lower bound:*
+
+Un problema tiene un límite por debajo cuando no hay ningun algoritmo que resueva el problema en tiene < L(n), para cualquier input e de tamaño n.
+
+        ∀A, ∃x tA(x) ≥ L(|x|)
 
