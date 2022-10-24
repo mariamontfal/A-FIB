@@ -33,19 +33,20 @@ Seleccionar el ítem con mayor ratio valor/peso siempre dirige hacia la solució
 
 *Pseudocódigo*
 
-    Ordenar los elementos en valor decreciente de v/w
-    S = {}; Val = 0; i=0;
-    mientras W>0 && i<n do
-        si w[i]<=W entonces
-            S = S ++{(i,1)}; W = W-w[i]; Val = Val + v[i]
-        sino
-            S = S ++{i,W/w[i]}; Val = Val + v[i]*W/w[i]; 
-            W = 0;
-        fi si
-        ++i;
-        Eliminar i de O
-    fi while
-    devolver S
+    FractionalKnapsack(n,v[],w[],W)
+        Ordenar los elementos en valor decreciente de v/w
+        S = {}; Val = 0; i=0;
+        mientras W>0 && i<n do
+            si w[i]<=W entonces
+                S = S ++{(i,1)}; W = W-w[i]; Val = Val + v[i]
+            sino
+                S = S ++{i,W/w[i]}; Val = Val + v[i]*W/w[i]; 
+                W = 0;
+            fi si
+            ++i;
+            Eliminar i de O
+        fi while
+        devolver S
     
 Coste del algoritmo anterior: O(n*log n)
 
@@ -64,7 +65,8 @@ Configuración general: Dado un conjunto de n tareas (con diferentes caracterís
 3. Queremos encontrar el conjunto de tareas mutuamente compatible donde las actividades i y j son compatible si [sifi) ∩ (sjfj] = ∅ con la medida máxima.
 
 *Pseudocódigo*
-
+        
+    IntervalScheduling(A)
         Ordenar A en orden ascendiente de A.f
         S = {0}
         j = 0 {puntero a la última tarea de S}
@@ -107,6 +109,7 @@ Esta versión se soluciona con programación dinámica
 
 *Pseudocódigo*
 
+    LatenessUrgen(A)
         Ordenar A en orden ascendiente de A.d
         S[0] = 0; t = A[0].t;
         L = max(0,t-A[0].d);
