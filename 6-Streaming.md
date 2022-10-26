@@ -56,12 +56,13 @@
     - n vértices
     - El stream describe las aristas de G
     - Asumimos que una arista aparece una única vez en el stream
-    - Queremos mantener el DS que permita responder consultar sobre una propiedad del grafo
+    - Queremos mantener el DS que permita responder consultas sobre una propiedad del grafo
     - O(n*log n) de memoria es razonable al estar trabajando con un modelo semi-stream.
     
 **Problema: Decidir si una entrada de un grafo en stream es conexo o no.** 
 
 Algoritmo:
+
     - Mantener un bosque generadores de H del grafo visto. 
     - Respuesta a la consulta acorde a H. 
 G conexo si y solo si admite un árbol generador. 
