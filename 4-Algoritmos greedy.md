@@ -25,7 +25,7 @@
 Para que funcione la estrategia *greedy*, se debe cumplir:
 
     - Greedy choice property: podemos llegar al óptimo global seleccionando óptimos locales
-    - Optimal substructure: después de hacer alguna decisión loca, debe ser el caso de que la solución óptima al problema contenga la solución parcial construida. 
+    - Optimal substructure: después de hacer alguna decisión local, debe ser el caso de que la solución óptima al problema contenga la solución parcial construida. 
     
 ### **Fractional Knapsack:** 
 
