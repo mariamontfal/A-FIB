@@ -9,7 +9,6 @@
     - No se pueden guardar todos en la memoria principal. 
     - No se puede volver a leer; o si se leen tienen coste. 
     - Abstraemos los datos a una característica en particular, el campo de interés será la etiqueta. 
-    
     - Tenemos un conjunto de n etiquetas Σ y nuestra entrada es stream.
         s = x1, x2, x3, ..., xm donde cada xi ∈ Σ.
     - Se tiene que tener en cuenta que algunas veces no se sabe el tamaño de la entrada del stream.
