@@ -116,7 +116,7 @@ Hace posible diseñar algoritmos cuasi-lineales para problemes que sino serían 
 
 Ordenar tiene coste O(m*log n)
 
-El resto de código tiene cosete lineal en n para el MAKESET y O(m) operaciones del tipo FIND/UNION
+El resto de código tiene coste lineal en n para el MAKESET y O(m) operaciones del tipo FIND/UNION
 
 El coste del algoritmo de Kruskal es O(m*lg m) = O(m* lg n) por la parte de ordenamiento, a no ser que utilicemos un rango de pesos que nos permita usar RADIX.
 
