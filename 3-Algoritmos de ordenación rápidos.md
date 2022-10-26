@@ -63,6 +63,7 @@ Los valores a ordenar están en el rango [0, 2^d].
 Coste del algoritmo: T(n,d,b) = Θ(d (n + b)) donde n = números, d = dígitos y b = base.
 
 Hay que *tunear* los parámetros para que el coste sea lineal:
+
     1. Escoger un entero e tal que 1 < e < d
     2. d´= ⌈d/e⌉
     3. b´= 2^e
