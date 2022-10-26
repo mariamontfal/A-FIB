@@ -57,7 +57,7 @@ Dado un array A con n números, cada uno tiene d dígitos en base b.
         for i=1 to d do:
             Utilizar un algoritmo estable para ordenar A acorde con el iésimo valor del dígito
             
-Los valores a ordenar están en el ranfo [0, 2^d].
+Los valores a ordenar están en el rango [0, 2^d].
 
     
 Coste del algoritmo: T(n,d,b) = Θ(d (n + b)) donde n = números, d = dígitos y b = base.
