@@ -53,7 +53,7 @@ Coste del algoritmo anterior: O(n*log n)
 
 ### **Scheduling:** 
 
-Configuración general: Dado un conjunto de n tareas (con diferentes características) para ser procesas por un solo procesador, proporciona un horario (dónde y cuándo cada tarea va a ser ejecutada) para optimizar según algun criterio.
+Configuración general: Dado un conjunto de n tareas (con diferentes características) para ser procesadas por un solo procesador, proporciona un horario (dónde y cuándo cada tarea va a ser ejecutada) para optimizar según algun criterio.
 
 #### **Interval Scheduling:** ####
 
