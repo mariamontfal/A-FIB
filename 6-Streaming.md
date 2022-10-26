@@ -38,7 +38,7 @@
 *Propiedades:*
 
 1. Normalmente para problemas de grafos.
-2. Memoria que trabaja es de O(n*polylog n). para un grafo con n vértices.
+2. Memoria que trabaja es de O(n*polylog n), para un grafo con n vértices.
 3. Suficiente espacio para guardar los vértices, pero no las aristas. 
 
 *Objetivos algorítmicos de los modelos stream:*
@@ -51,6 +51,7 @@
 ### **Streams que describen grafos:**
 
 *Propiedades*
+
     - G no dirigido
     - n vértices
     - El stream describe las aristas de G
