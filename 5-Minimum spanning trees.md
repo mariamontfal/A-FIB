@@ -3,7 +3,8 @@
 ### **Árboles:**
 
 *Propiedades*
-    -  Un árbol de n nodos tiene n-1 aristas.
+
+    - Un árbol de n nodos tiene n-1 aristas.
     - Cualquier grafo no dirigido conexo con n vértices y con n-1 aristas es un árbol. 
     - Un grafo no dirigido es un árbol si y solo si tiene un camino único entre cualquier par de nodos.
     - Cualuquier grafo conexo tiene un árbol generador. 
