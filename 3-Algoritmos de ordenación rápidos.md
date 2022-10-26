@@ -16,9 +16,10 @@ Considera todos los posibles valores de i ∈ [0, r].
 
 Para cada uno de ellos, cuenta cuantos elementos en A son más pequeños o iguales a i.
 
-Utiliza esta información para colocar los elementos en el lugar correcto
+Utiliza esta información para colocar los elementos en el lugar correcto.
 
 Estructuras: 
+
     1. Entrada: A[n] 
     2. Salida: B[n]
     3. Interna: C[r+1]  //para hacer el conteo
