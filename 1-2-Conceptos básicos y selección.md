@@ -118,7 +118,7 @@ Un digrafo tiene una componente fuertemente conexa, si para todo vértice u,v
 
 perteneciente a V, existe un camino que va de u a v y de v a u. 
 
-El grafo de la componente fuertemente conexa SIEMPRE será acíclico. 
+El grafo entre sus componentes fuertemente conexa SIEMPRE será acíclico. 
 
 
 Una componente fuertemente conexa, es una componente maximal fuertemente conexa del grafo. 
