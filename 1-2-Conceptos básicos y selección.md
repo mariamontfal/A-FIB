@@ -90,7 +90,7 @@ BFS utiliza una cola (FIFO), para mantener a todos los vecinos de los vértices 
     2) Repetir 1 hasta que no se pueda. 
     3) Entonces, backtrack hasta un nodo no visitado. 
     
-DFS utilizado una cola (LIFO)
+DFS utilizado una pila (LIFO)
 
 
 
