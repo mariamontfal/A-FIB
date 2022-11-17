@@ -44,4 +44,61 @@ En cada paso, una solución parcial (a1,...,ak) es construída.
                 Sk= Sk - {ak}
                 BacktrackR(A,k)
 
-Cada llamada recursiva identifica un subproblema que es resuelto recursivamente.                 
+Cada llamada recursiva identifica un subproblema que es resuelto recursivamente.   
+
+## Generando subsets
+
+Sea S un set con n elementos
+Hay un total de 2^n subconjuntos en total y n sobre k subconjuntos de k elementos. 
+
+Si enumeramos todos los subconjuntos (p. ej. con un orden lexicográfico), el recorrido será un árbol de recursión en profundidad.
+
+## Generando todas las permutaciones
+
+Hay un total de n! permutaciones de un conjunto de n elementos. 
+Hay n opciones para el primer elemento, n-1 para el siguiente, etc.
+
+n! puede ser delimitado utilizando la fórmula de Stirling:
+
+![Stirling's formula](https://johncarlosbaez.files.wordpress.com/2021/10/stirlings_formula-1.jpg?w=640)
+
+El algoritmo realiza un recorrido en profundidad del árbol de configuraciones.
+
+## El problema del viajante de comercio
+
+*Problema*
+
+Dadas n ciudades con distacias dij entre un par de ellas, encontrar el recorrido más corto que pasa exactamente una vez por cada ciudad.
+
+*Primera idea*
+
+Realizar backatracking generando todas las permutaciones y modificarla para computar la longitud de la permutación y devolver el mínimo. 
+
+Este algoritmo produce el óptimo en O(n!d) donde n es el número de ciudades i d es la longitud de la distancia máxima. 
+
+*Segunda idea*
+
+Igual que antes pero descartados algunas soluciones parciales mayores que la solución actual (poda)- Se reduce pero tiene el mismo coste que el anterior.
+
+## Knapsack
+
+Tenemos un set I con n items y el ítem i tiene peso wi y un valor de vi. Tenemos un límite para transportar hasta un peso W. Considerando que no se pueden fraccionar los ítems:
+
+*Primera idea*
+
+Utilizar backtracking generando todos los subconjuntos.
+Producirá el óptimo con coste (2^n * M) donde n es el número de objetos y M es la longitud máxima de los números en los inputs.
+
+*Segunda idea*
+
+Utilizar backtracking con poda para no generar todos los hijos en los que el peso supera W.
+En caso peor, tiene el mismo coste que el anterior, exponencial. 
+
+*Tercera idea*
+
+Si encontramos una buena solución al inicio, excluyendo las soluciones parciales con coste menor menor, podemos reducir el tamaño de la búsqueda. 
+El coste sigue siendo ifual que el anterior. 
+
+*Quarta idea: Branch and bound*
+
+Descartamos algunas ramas limitando la mejora
