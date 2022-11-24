@@ -49,13 +49,57 @@ Dado G = (V,E,w) un distinguido s ∈ V, un camino árbol mínimo es un subárbo
 ### Single Source shortest path
 
 Dado un grafo G = (V,E,w) y s ∈ V, encontrar el camino mínimo de s al resto de vértices en G si este existe. 
+- El algoritmo mantiene para v ∈ V, una sobreestimación de d[v] de δ(s,v) y un predecesor a candidato p[v] para el camino mínimo entre s y v. 
+
+- Inicialmente, d[v] = +∞ para v ∈ V - {s}, d[s] = 0 y p[v] = v.
+
+- Repetidamente, se mejora la estimación hasta llegar que d[v] = δ(s,v).
+
+- En la arista seleccionada (u,v) ∈ E aplicar una operación de relajación.
+    
+
+    Relax (u,v):
+        if d[v] > d[u] + w(u,v) then
+            d[v] = d[u] + w(u,v)
+            p[v] = u
+            
+Es decir d'[v] = min{d[v], d[u] + w(u,v)} } ≥ δ(s,v).
 
 Para resolver este problema tenemos dos estrategias diferentes:
 
 #### Algoritmo de Dijkstra
 
-Algoritmo greedy muy eficiente que solo funciona con **pesos positivos**.
-Supone que el grafo entra como una lista de adyacencia.
+- Algoritmo greedy muy eficiente; en cada paso para un vértice v, d[v] se convierte en δ(s,v) con una distancia correcta.
+- Solo funciona con **pesos positivos**.
+- Supone que el grafo entra como una lista de adyacencia.
+- Relaja las aristas correspondientes al vértice actual. 
+-Utiliza una cola de prioridad.
+
+*Pseudocódigo:*
+
+    Dijkstra(G,w,s):
+        d[u] = +∞ y p[u] = u, u ∈ V
+        d[s] = 0
+        S = ∅
+        Insertar los vértices en Q con clave d
+        while Q /= ∅ do:
+        u = Q.pop()
+        S = S ∪ {u}
+        for all v ∈ Adj[u] y v /∈ S do:
+            Relax(u, v)
+            Cambiar la clave de v si es necesario
+
+**Teorema:**
+
+Considera S en cualquier punto de la ejecución del algoritmo. Para cada u ∈ S, d[u] = δ(s,u). 
+
+La demostración es con inducción sobre |S|.
+
+Utilizando una cola de prioridad, Dikstra puede ser implementado en un grafo con n nodos y m aristas en tiempo O(m) + el tiempo de los pops de la cola de prioridad y el cambio de clave. 
+
+**Coste del algoritmo:**
+- Con implementación de Q como un heap = O (m * lg n)
+- Con implementación de Q como un Fibonacci heap = O (m + n + lg n)
 
 #### Algoritmo de Bellman-Ford
 
