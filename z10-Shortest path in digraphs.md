@@ -103,8 +103,51 @@ Utilizando una cola de prioridad, Dikstra puede ser implementado en un grafo con
 
 #### Algoritmo de Bellman-Ford
 
-Algoritmo que funciona para todo tipo de pesos y detecta si la distancia puede ser definida. 
-Supone que el grafo entra como una lista de adyacencia.
+- Algoritmo que funciona para todo tipo de pesos y detecta si la distancia puede ser definida. 
+-Supone que el grafo entra como una lista de adyacencia.
+
+*Pseudocódigo:*
+
+    BF (G,w,s):
+        For v ∈ V , d[v] = +∞, p[v] =v
+        d[s] = 0
+        for i = 1 to n − 1 do:
+            for all (u,v) ∈ E do:
+                Relax(u, v)
+        for all (u, v) ∈ E do:
+            if d[v] > d[u] + w (u, v) then:
+                return Ciclo con peso negativo
+        return d, p
+
+**Correctitud de BF:**
+
+Consideramos el vector d computado por BF al final de la iésima iteración. Para v ∈ V, d[v] ≤ w(P) para cada camino P de s a v y longitud l(O) ≤ i. 
+
+La demostración se hace con inducción sobre i. 
+
+Antes de la iésima iteración, d[v] ≤ min{w(p)} para todos los caminos p con almenos i-1 aristas. 
+
+La iésima iteración considera todos los caminos con ≤ i aristas alcanzando v, cuando se relaja la última arista en estos caminos. 
+
+**Teorema:** Si (G,w) no tiene ciclos con pesos negativos, BF computa correctamente δ(s, v). 
+
+Demostración:
+
+- Sin ciclos con pesos negativos, el camino mínimo es simple (no repite vértices). Como mucho n vértices y n-1 aristas.
+
+- Con el lema anterior, las n-1 iteraciones mantienen d[v] ≤ δ(s, v). 
+
+- Por el invariante de relajación : d[v] ≥ δ(s, v). 
+
+**Teorema:** BF encuentra el ciclo con peso negativo, si y solo si existe y es alcanzable desde s. 
+
+Demostración:
+
+- Sin ciclos con pesos negativos, el teorema anterior implica d[v] = δ(s, v), y por la desigualdad triangular d[v] ≤ δ(s, v) + w(u, v), por lo que BF no reportará un ciclo con peso negativo si no existe.
+
+- Si existe un ciclo con peso negativo, entonces, una de las aristas puede ser relajada para que BF funcione correctamente. 
+
+**Coste del algoritmo:** O (n*m)
 
 ### All pairs shortest paths
 
