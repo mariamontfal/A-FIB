@@ -33,3 +33,47 @@ De otro modo, la distancia no puede ser definida.
 
 - Si G no tiene pesos, podemos asignar a cada atista peso = 1. 
 
+#### *Propiedades*
+
+Dado G = (V,E,w), para cada p camino mínimo de u a v y para cada par de vértices i,j en el camino p, el subcamino p' de i a j de p es un camino mínimo.
+
+- **Teorema:** Sea G = (V,E,w) el grafo tal que para u, v ∈ V, δ(u,v) puede ser definida. Para u,v,z  ∈ V(G), δ(u,v) ≤ δ(u,z) + δ(z,v).
+
+Dado G = (V,E,w) un distinguido s ∈ V, un camino árbol mínimo es un subárbol dirigido, Ts = (V′,E′), de G.
+
+- Ts tiene como raíz s
+- V' es un conjunto de vértices en G alcanzables desde s
+- Para v ∈ V′ el caminon de s a v en Ts tiene peso δ(s,v)
+
+
+### Single Source shortest path
+
+Dado un grafo G = (V,E,w) y s ∈ V, encontrar el camino mínimo de s al resto de vértices en G si este existe. 
+
+Para resolver este problema tenemos dos estrategias diferentes:
+
+#### Algoritmo de Dijkstra
+
+Algoritmo greedy muy eficiente que solo funciona con **pesos positivos**.
+Supone que el grafo entra como una lista de adyacencia.
+
+#### Algoritmo de Bellman-Ford
+
+Algoritmo que funciona para todo tipo de pesos y detecta si la distancia puede ser definida. 
+Supone que el grafo entra como una lista de adyacencia.
+
+### All pairs shortest paths
+
+Dado un grafo G = (V,E,w) sin ciclos con peso negativo, para cada u,v ∈ V (G) encontrar el camino mínimo de u a v si existe. 
+
+Para resolver este problema tenemos dos estrategias diferentes:
+
+
+#### Algoritmo de Floyd-Warshall
+
+Algoritmo que utiliza la programación dinámica y tiene como input la matriz de adyacencia de G.
+
+#### Algoritmo de Johnson
+
+Algoritmo eficiente para grafos dispersos. 
+
