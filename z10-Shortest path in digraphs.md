@@ -561,3 +561,12 @@ Por la desigualdad triangular, el camino p de u a v, δ<sub>G'</sub>(s, v) ≤ �
 |--------------------------|------------------|------------------|----|----|
 | w $\geq$ 0                 | O(n * m + n² * lg n)  | O(n² * m)         | O(n³) | O(n * m + n² * lg n) 
 | w $\in$   $\mathbb{R}$   |   NO             | O(n² * m)         | O(n³) | O(n * m + n² * lg n)
+
+
+*Algunos puntos sobre APSP:*
+
+- Para grafos dispersos con m = ω(n), m = o(n²), Johnson es el más eficiente.
+
+- Para grafos densos con m =  Θ(n²), FW tiene la mejor complejidad. 
+
+- Para grafos no dirigidos o sin pesos, hay un algoritmo de R.Seidel que trabaja en tiempo O(n<sup>ω</sup>lg n), donde n<sup>ω</sup> es la complejidad de multiplicar dos matrices *n* x *b* donde <sup>ω</sup> ~ 2.3.
