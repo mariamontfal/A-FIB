@@ -149,16 +149,75 @@ Demostración:
 
 **Coste del algoritmo:** O (n*m)
 
+#### DAGs
+
+Dado un grafo G con aristar dirigidas con peso, G = (V,E,w) y s ∈ V, encontrar el camino mínimo de s al resto de vértices en G si existe. 
+
+- Un DAG no tiene ciclos, por lo que la distancia puede ser definida entre cualquier par de vértices. 
+- En particular, hay un camino mínimo de s a cualquier v alcanzable desde s. 
+- Para obtener un algoritmo más rápido, miramos en una buena ordenación para las aristas: orden topológico. 
+
+
+*Pseudocódigo:*
+
+Sea Pre(v) = {u ∈ V | (u, v) ∈ E}
+    
+
+    
+    SSSP-DAG(G , w):
+        Sort V in topologica order
+        For v ∈ V set d[v] = ∞ and p[v] = v
+        d[s] = 0
+        for all v ∈ V − {s} in order do:
+            d[v] = min <sub>u ∈ Pre(v)</sub>{d[u] + w<sub>uv</sub>}
+            p[v] = arg min<sub>u∈Pre[v]</sub>{d[u] + w<sub>uv</sub>}
+
+
+
+**Complejidad**: T(n) = O(n+m)
+
+**Correctitud**: d[u] = δ(s, u), para u ∈ Pre(v)
+
 ### All pairs shortest paths
 
-Dado un grafo G = (V,E,w) sin ciclos con peso negativo, para cada u,v ∈ V (G) encontrar el camino mínimo de u a v si existe. 
+- Dado un grafo G = (V,E,w), |V| = n, |E| = m,  queremos determinar ∀u, v ∈ V , δ(u, v).
 
+- Asumimos que G no contiene ciclos con peso negativo. 
+- Idea naive: aplicamos n veces BF o Dijkstra(si no hay pesos con cilo negativos). 
+- La repetición de BF n veces tendría un coste de O(n<sup>2</sup>m). 
+- La repetición de Dijkstra n veces tendría un coste de O(n * m * lg n) (si Q está implementado con un heap). 
+- En vez de considerar la representación de G en una lista de adyacencia como en SSSP, aquí se considera la entrada como una matriz de adyacencia. 
+- Por conveniencia V = {1,...,n}. La matriz de adyacencia n x n W = (w(i,j)) de G, w:
+
+$$\ w_{ij} =
+\begin{cases}
+0 & si & i = j \\
+w_{ij} & si & (i,j)\in E \\
+\infty &  si  & i\neq j  \bigwedge (i,j) \notin E 
+\end{cases}
+\$$
+
+- La salida es una matrix *n* x *n* D, donde D[i,j] = \delta\ (i,j) y una matrix *n* x *n* P, donde P[i,j] es el predecesor de j en el camino mínimo de i a j.
+    
+    
 Para resolver este problema tenemos dos estrategias diferentes:
 
 
 #### Algoritmo de Floyd-Warshall
 
-Algoritmo que utiliza la programación dinámica y tiene como input la matriz de adyacencia de G.
+- Algoritmo que utiliza la programación dinámica para explotar la estructura recursiva de los caminos mínimos. Cada subcamino de un camino mínimo es un camino mínimo.
+- Sea d<sub>ij</sub><sup>(k)</sup> el peso mínimo de un camino de i a j, sus nodos intermedios van de {1,...,k}. 
+- Cuando k = 0, d<sub>ij</sub><sup>(0)</sup> = w_{ij} (no hay nodos intermedios)
+- Utiliza una matriz de adyacencia.
+
+*La recurrencia:*
+
+$$\ d_{ij}^{(k)} =
+\begin{cases}
+w_{ij} & si & k = 0 \\
+min{ij} & si & k\geq 1 \\
+\end{cases}
+\$$
 
 #### Algoritmo de Johnson
 
