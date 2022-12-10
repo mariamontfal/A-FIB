@@ -37,3 +37,24 @@ El flujo a través del corte:
 *f(S,T)* = $\Sigma$ <sub> u ∈ S </sub> $\Sigma$ <sub> v ∈ T </sub> *f(u,v)* - $\Sigma$ <sub> v ∈ T </sub> $\Sigma$ <sub> u ∈ S </sub> *f(u,v)*
 
 Por la restricción de capacidad: *f(S,T)* $\leq$ *c(S,T)*
+
+
+****
+
+### Problema del corte mínimo
+
+Entrada: Una red $\eta$ = *(V,E,c,s,t)*
+
+Objetivo: Encontrar el corte (s,t) de capacidad mínima en $\eta$
+
+Si modificamos la entrada añadiendo c > 0 a la **capacidad de cada arista**, puede pasar que (S,T) ya no sea un corte (s,t) mínimo. 
+
+**Efectos de cambiar el peso:
+
+Si modificamos la red multiplicando por c > la capacidad de cada arista, la capacidad de cualquier (s,t) corte en la nueva red es c veces la capacidad de la red original. 
+
+
+
+****
+
+### Propiedades de los flujos y cortes
