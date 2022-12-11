@@ -82,7 +82,7 @@ Para un corte-(s,t) y v $\in$ S:
 
 **Teorema**
 
-*Sea* $\eta$ = *(V,E,c,s,t)* y *f* un flujo de $\eta$ . Para cada corte-(s,t) (S,T), f(S,T) = |f|*
+*Sea* $\eta$ = *(V,E,c,s,t)* y *f* un flujo de $\eta$ . Para cada corte-(s,t) *(S,T), f(S,T)* = |*f*|
 
 *Demostración:*
 
