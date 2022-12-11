@@ -49,7 +49,7 @@ Objetivo: Encontrar el corte (s,t) de capacidad mínima en $\eta$
 
 Si modificamos la entrada añadiendo c > 0 a la **capacidad de cada arista**, puede pasar que (S,T) ya no sea un corte (s,t) mínimo. 
 
-**Efectos de cambiar el peso:
+**Efectos de cambiar el peso:**
 
 Si modificamos la red multiplicando por c > la capacidad de cada arista, la capacidad de cualquier (s,t) corte en la nueva red es c veces la capacidad de la red original. 
 
@@ -76,13 +76,13 @@ Para un corte-(s,t) y v $\in$ S:
 
 - S' = S \ {v} y T' = T $\cup$ {v}
 
-- *f <sub> -v </sub> (S,T)* = $\Sigma$ <sub> u ∈ S' </sub> $\Sigma$ <sub> w ∈ T </sub> *f(u,w)* - $\Sigma$ <sub> w ∈ T  </sub> $\Sigma$ <sub> u ∈ S' *f(w,u)* por ejemplo la contribución en *f(S,T)* para las aristas no incidentes en v
+- *f <sub> -v </sub> (S,T)* = $\Sigma$ <sub> u ∈ S' </sub> $\Sigma$ <sub> w ∈ T </sub> *f(u,w)* - $\Sigma$ <sub> w ∈ T  </sub> $\Sigma$ <sub> u ∈ S'</sub> *f(w,u)* por ejemplo la contribución en *f(S,T)* para las aristas no incidentes en v
 
 #### Conservación del flujo en los cortes-(s,t)
 
 **Teorema**
 
-*Sea $\eta$ = *(V,E,c,s,t)* y *f* un flujo de $\eta$ . Para cada corte-(s,t) (S,T), f(S,T) = |f|*
+*Sea* $\eta$ = *(V,E,c,s,t)* y *f* un flujo de $\eta$ . Para cada corte-(s,t) (S,T), f(S,T) = |f|*
 
 *Demostración:*
 
