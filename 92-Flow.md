@@ -58,3 +58,53 @@ Si modificamos la red multiplicando por c > la capacidad de cada arista, la capa
 ****
 
 ### Propiedades de los flujos y cortes
+
+
+
+#### Notación
+
+Sea $\eta$ = *(V,E,c,s,t)* y *f* un flujo de $\eta$
+
+Para v $\in$ V, 
+U ⊆ V y v $\notin$ U:
+
+- *f(v,U)* flujo v → U por ejemplo *f(v,U)* = $\Sigma$ <sub> u ∈ U </sub> *f(v,u)*
+
+- *f(U,v)* flujo U → v por ejemplo *f(U,v)* = $\Sigma$ <sub> u ∈ U </sub> *f(u,v)*
+
+Para un corte-(s,t) y v $\in$ S:
+
+- S' = S \ {v} y T' = T $\cup$ {v}
+
+- *f <sub> -v </sub> (S,T)* = $\Sigma$ <sub> u ∈ S' </sub> $\Sigma$ <sub> w ∈ T </sub> *f(u,w)* - $\Sigma$ <sub> w ∈ T  </sub> $\Sigma$ <sub> u ∈ S' *f(w,u)* por ejemplo la contribución en *f(S,T)* para las aristas no incidentes en v
+
+#### Conservación del flujo en los cortes-(s,t)
+
+**Teorema**
+
+*Sea $\eta$ = *(V,E,c,s,t)* y *f* un flujo de $\eta$ . Para cada corte-(s,t) (S,T), f(S,T) = |f|*
+
+*Demostración:*
+
+Por inducción sobre |S|
+
+- Si S = {s} entonces, por definición, *f(S,T) =* |*f*|
+
+- Assumimos es cierto para *S' = S* - {*v*} y *T' = T* $\cup$ {*v*}, por ejemplo *f(S',T')* = |*f*|
+
+- HI: *f(S',T')* = |*f*|
+
+- Entonces, *f(S,T)* = *f<sub>-v</sub> (S,T)* + *f(v,T)* + *f(T,v)*
+
+- Pero, *f(S',T')* = *f<sub>-v</sub> (S,T)* + *f(S',v)* - *f(b,S')* como *v* $\in$ *T'*
+
+- Por conservación del flujo: *f (S', v)* + *f(T, v) = f(v, S')* + *f(v ,T)*
+
+- Por lo que,  *f (S', v)* - *f(v, S') = f(v, T)* - *f(T ,v)*
+
+- Entonces, *f(S,T) = f(S',T') =* |*f*|
+
+****
+
+### Grafos residuales
+
