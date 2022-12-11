@@ -179,3 +179,90 @@ Sea f' = Augment(P,f), entonces |f'| > |f|.
 
 Sea P un camino de aumento en G<sub>f</sub>. La primera arista e $\in$ P sale de s, y como G no tiene aristas entrantes en s, e es una arista de retroceso. Además, P es simple ⇒ nunca vuelve a s. 
 Entonces, el valor del flujo incrementa en la arista e aumenta en b unidades. 
+
+****
+
+### Teorema Max-Flow min-cut
+
+*Demostración:*
+
+Sea *f* \* un flujo con máximo valor, |*f* \*| = max <sub> f </sub> {| *f* |}
+
+- Para cualquier corte-(s,t) (S,T), *f* \*(S,T) $\leq$ c(S,T)
+
+- G<sub>f*</sub> no tiene camino de aumento. Si S<sub>s</sub> = {v $\in$ V | $\exists$ s -> v in G<sub>f*</sub>}, entonces (S<sub>s</sub>, V - {S<sub>s</sub>}) es un corte-(s,t).
+
+- Para e = (u,v) $\in$ E con u $\in$ S<sub>s</sub> y v $\notin$ S<sub>s</sub>, (u,v) $\notin$ E(G<sub>f*</sub>, por tanto f*(u,v) = c(u,v))
+
+- Entonces, c(S<sub>s</sub>, V − {S<sub>s</sub>}) = f* (S<sub>s</sub> , V − {S<sub>s</sub>}) = |f*|
+
+- (S<sub>s</sub>, V − {S<sub>s</sub>}) es la capacidad mínima del corte (s,t) en G
+
+****
+### Algoritmo de Ford-Fulkerson
+
+Objectivo: El flujo máximo a través de una red
+
+*Pseudocódigo:*
+
+    Ford-Fulkerson(G, s, t, c): 
+        forall(u,v) ∈ E set f(u,v) = 0
+        Gf = G
+        while haya un camino (s,t) P en Gf do:
+            f = Augment(P, Gf)
+            Compute Gf 
+        return f
+
+**Teorema:**
+
+El flujo devuelto por FF es el max-flow
+
+#### Red con capacidades enteras
+
+1. INVARIANTE:
+
+*Lema:*
+
+Sea $\eta$ = *(V,E,c,s,t)* donde c : *E* $\rightarrow$ $\mathbb{Z^+}$. En cada iteración de FF, los valores de flujo f(e) son enteros.
+
+*Demostración:*
+
+Por inducción:
+
+- La proposición es cierta para el flujo inicial (todo son 0). 
+
+- HI: La proposición es cierta después de j iteraciones. 
+
+- En la iteración j + 1: como las capacidades residuales en G<sub>f</sub> son enteros, el cuello de botella (P,f) $\in$ $\mathbb{Z}$ para el camino de aumento encontrado en la iteración j + 1. 
+
+- Como consecuencia, los valores del flujo aumentado son enteros. 
+
+2. TEOREMA:
+
+*Lema*: 
+
+Sea $\eta$ = *(V,E,c,s,t)* donde c : *E* $\rightarrow$ $\mathbb{Z^+}$. Existe un max-flow f* tal que f*(e) es entero, para cualquier e $\in$ E.
+
+*Demostración:*
+
+Como el algoritmo termina, el teorema sigue por del lema invariante de la integralidad. 
+
+3. TIEMPO DE EJECUCIÓN
+
+*Lema:* 
+
+Sea C la capacidad min cut (= valor de max. flow), FF termina después de encontrar al menos C caminos de aumento. 
+
+*Demostración:*
+
+El valor del flujo incrementa en $\geq$ 1 después de cada aumento.
+
+El número de iteraciones es $\leq$ C. En cada iteración:
+
+- Construyendo G<sub>f</sub>, con *E*(G<sub>f</sub>) $\leq$ 2m, tiene coste O(m).
+
+- O(n+m) para encontrar el camino de aumento o decidir si existe. 
+
+- Coste total O(C \* (n+m)) = O(C\*m)
+
+- Es pseudopolinómico
