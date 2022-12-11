@@ -108,3 +108,74 @@ Por inducción sobre |S|
 
 ### Grafos residuales
 
+*Sea* $\eta$ = *(V,E,c,s,t)* conjuntamente con un flujo *f*. 
+
+El grafo residual G<sub>f</sub> = (V, E<sub>f</sub>, c<sub>f</sub>) es un digrafo con pesos con el mismo conjunto de vértices y com aristas:
+
+- Si c(u,v) - f(u,v) > 0 entonces (u,v) $\in$ E<sub>f</sub> y c<sub>f</sub> (u,v) = c(u,v) - f(u,v) > 0 (forward edges). "Lo que no he servido". 
+
+- Si f(u,v) > 0 entonces (v,u) $\in$ E<sub>f</sub> y c<sub>f</sub> (v,u) = f(u,v) - f(u,v) > 0 (backward edges). "Lo que he servido girando las aristas".
+- Notad que si c(u,v) = f(u,v) solo hay una arista de retroceso.
+- c<sub>f</sub> es conocido como la capacidad residual.
+- forward edges: aún queda capacidad para enviar más flujo por la arista. 
+- backward edges: las unidades de flujo que pueden ser redirigidas a través de otros links. 
+
+****
+
+### Camino de aumento
+
+*Sea* $\eta$ = *(V,E,c,s,t)* y *f* un flujo en $\eta$. 
+
+- Un camino de aumento *P* es un camino simple *P* en G<sub>f</sub> de s a t. 
+
+- *P* puede tener forward y backward edges.
+
+- Para un camino de aumento *P* en  G<sub>f</sub>, el cuello de botella b(P) es un la mínima capacidad (residual) de las aristas en *P*. 
+
+
+*Pseudocódigo:*
+
+
+    Augment(P,f):
+        b = bottleneck (P)
+        foreach (u,v) ∈ P do:
+            si(u,v) es forward edge then
+                Increase f(u,v) en b
+            else
+                Decrease f(v,u) en b
+        return f
+
+**Lemma:**
+
+Sea f' = Augment(P,f), entonces f' es un flujo en G. 
+
+*Demostración:*
+
+Debemos demostrar las dos propiedades de flujo:
+
+1) Ley de la capacidad
+    
+    - Forward edges (u,v) $\in$ P, incrementamos f(u,v) en b, como b $\leq$ c(u,v) - f(u,v) entonces f'(u,v) + b $\leq$ c(u,v)
+    
+    - Backward edges (u,v) $\in$ P, decrementamos f(v,u) en b, como b $\leq$ f(v,u), f'(v,u) = f(u,v) - b $\geq$ 0
+
+2) Ley de la conservación, $\forall$ v $\in$ P \ {s,t} sea u el predecesor de v en P y sea w su sucesor
+
+    -  Como el camino es simple solo las alteraciones dado (u,v) y (v,w) pueden cambiar el flujo que pasa por v. Tenemos 4 casos: 
+    
+        i. (u,v) y (v,w) son backward edges, el flujo en (v,u) y (w,v) es decrementado en b. Como uno es entrante y el otro saliente, el balance total es 0. 
+        
+        ii. (u,v) y (v,w) son forward edges, el flujo en (u,v) y (v,w) es incrementado en b. Como uno es entrante y el otro saliente, el balance total es 0. 
+        iii. (u, v) es forward i (v, w) es backward, el flujo en (u, v) es incrementado en b y el flujo en (w,v) es decrementado en b. Como los dos son entrantes, el balance total es 0.
+        
+        iv. (u, v) es backward y (v, w) es forward, el flujo en (v, w) es incrementado en b y el flujo en (v,u) es decrementado en b. Como los dos son salientes, el balance total es 0.
+
+
+**Lemma:**
+
+Sea f' = Augment(P,f), entonces |f'| > |f|. 
+
+*Demostración:*
+
+Sea P un camino de aumento en G<sub>f</sub>. La primera arista e $\in$ P sale de s, y como G no tiene aristas entrantes en s, e es una arista de retroceso. Además, P es simple ⇒ nunca vuelve a s. 
+Entonces, el valor del flujo incrementa en la arista e aumenta en b unidades. 
