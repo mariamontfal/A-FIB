@@ -281,7 +281,15 @@ De G = (L ∪ R, E) construímos $\eta$ = *(V',E',c',s',t')*
 
 - Añadir vértices s y t: V' =  L ∪ R ∪ {s, t}
 - Añadir aristas dirigidas s → L con capacidad 1. Añadir aristas dirigidas de R → t con capacidad 1.
-- Dirigir las aristas E de L a R, y dar capacidad \$infty$
+- Dirigir las aristas E de L a R, y dar capacidad $\infty$
 - E' = {s → L} ∪ E ∪ {R → t}
 
 **Teorema**
+
+Max flow en $\eta$ = Asignación máxima bipartida en G
+
+*Demostración: Asignación como flujos*
+
+Sea M una asignación en G con k-aristas, consideramos el flujo *f* que envía una unidad a lo largo de cada k camino, s → u → v → t, para (u,v) ∈ M.
+
+
