@@ -266,3 +266,22 @@ El número de iteraciones es $\leq$ C. En cada iteración:
 - Coste total O(C \* (n+m)) = O(C\*m)
 
 - Es pseudopolinómico
+
+### Maximum matching problem
+
+Dado un grafo no dirigido G = (V,E) un subconjunto de aristas M ⊆ E es una asignación si cada nodo aparece como mucho en una arista en M (un nodo puede no aparecer). 
+
+Dado un grafo G, encontrar la asignación con máxima cardinalidad.
+
+Un grafo G = (V,E) es bipartido si hay una partición de V en L y R tal que L ∪ R = V y L ∩ R = ∅, de tal manera que cada e ∈ E conecta un vértice de L con un vértice en R.
+
+Queremos resolver el problema de la máxima asignación en grafos bipartidos. 
+
+De G = (L ∪ R, E) construímos $\eta$ = *(V',E',c',s',t')*
+
+- Añadir vértices s y t: V' =  L ∪ R ∪ {s, t}
+- Añadir aristas dirigidas s → L con capacidad 1. Añadir aristas dirigidas de R → t con capacidad 1.
+- Dirigir las aristas E de L a R, y dar capacidad \$infty$
+- E' = {s → L} ∪ E ∪ {R → t}
+
+**Teorema**
