@@ -292,4 +292,74 @@ Max flow en $\eta$ = Asignación máxima bipartida en G
 
 Sea M una asignación en G con k-aristas, consideramos el flujo *f* que envía una unidad a lo largo de cada k camino, s → u → v → t, para (u,v) ∈ M.
 
+#### Flujos como asignaciones
 
+- Consideramos un flujo integral *f* en G'. Entonces, para cada arista e, el flujo es o 0 o 1. 
+
+- Consideramos el corte C = ({s} ∪ L, R ∪ {t}) en G'. 
+
+- Sea M el conjunto de aristas en el corte C con flujo = 1, entonces |M| = |*f*|.
+
+- Cada nodo en L está como mucho en un e ∈ M y cada nodo de R esta en como mucho una cada de e ∈ F. 
+
+- Entonces, M es una asignnación en G con |M| $\leq$ |*f*|
+
+Como $\eta$ tiene capacidades enteras, existe un flujo máximo entero asociado a *f* *. La asignación asociada es una asignación máxima.
+
+*Coste:*
+
+- El grafo bipartido, tiene *n* vertices y *m* aristas. Las capacidades son enteres. Necesitamos una solución entera.
+
+- El algoritmo: 
+
+    1) Construye $\eta$ 
+    2) Ejecuta FF en $\eta$ para obtener el flujo máximo *f*
+    3) De *f* obtienne la máxima asignación M
+    
+- $\eta$ tiene n+2 vértices y m+2n aristas, por lo que los pasos del algoritmo anteriores:
+    
+    1) Tarda O(n+m)
+    2) El máximo valor de $\eta$ es como mucho n, por lo que tarda tiempo O(|*f*| (n+m)) = O(n<sup>2</sup> + nm)
+    3) Puede hacerse en tiempo O(n + m)
+    
+El coste total es: O(n<sup>2</sup> + nm)
+
+### Problema de los caminos disjuntos (aristas)
+
+Dado un digrafo G = (V,E) y dos vértices s,t ∈ V, un conjunto de caminos es de aristas-disjuntas si sus aristas son diferentes (aunque pueden compartir algun vértice)
+
+Dado un digrafo G = (V,E) y dos vértices s,t ∈ V, encontrar el conjunto de s---->t caminos disjuntos de máxima cardinalidad.
+
+Pensando en términos de flujo, un camino de s a t puede ser visto como el envío de una unidad de flujo. 
+
+Construimos una red $\eta$ asignando capacidad a cada arista.
+
+**Teorema:**
+
+El número máximo de caminos disjuntos de s---->t es igual al valor del flujo máximo.
+
+*Demostración:*
+
+Número de caminos disjuntos $\leq$ max flow
+
+Si tenemos k caminos disjuntos de s---->t en G, haciendo f(e) = 1 para cada arista en el camino, obtenemos un flujo con |*f*| = k 
+
+- Si el valor del flujo máximo es k, existe un flujo *f* * 0-1 con valor k. 
+
+- Consideramos el grafo G* = (V, E') donde E' está formada por aristas e con f(e) = 1
+
+- Repetidamente computamos s--->t como camino simple en G*, y eliminamos sus aristas de G*. 
+
+- Cada vez que se elimina un camino, el valor del flujo en la red se reduce en uno, por lo que aplicamos el proceso k veces. 
+
+- Ninguno de los caminos comparten aristas, por lo que encontramos k caminos disjuntos. 
+
+*Coste:*
+
+- El grafo tiene n vértices y m aristas. Las capcidades son enteras. Necesitamos encontrar una solución entera. 
+
+- El algoritmo: (1) construye $\eta$, (2) ejecuta FF en $\eta$ para obtener el flujo máximo *f*, (3) obtiene de *f* |*f*| caminos disjuntos.
+
+- $\eta$ tiene n vértices y m aristas: (1) tarda O(n+m), (2) tarda O(|*f*| (n+m)) = O(n<sup>2</sup> + nm), (3) se puede calcular en O(n+m).
+
+El coste total es: O(|*f*| (n+m)) = O(n<sup>2</sup> + nm)
