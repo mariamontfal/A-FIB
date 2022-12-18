@@ -97,5 +97,54 @@ El flujo máximo se puede computar en O(nm): J.Orlin (2013)
   
 ### Aplicaciones: problemas de asignaciones generalizadas
   
-  
-  
+- Consideramos un problema de asignación generalizada GP donde, tenemos como input d conjuntos finitos X<sub>1</sub>, ..., X<sub>d</sub>, cada uno representando un conjunto diferente de recursos. 
+- Nuestro objectivo es escoger el número de d-tuplas "más grande", cada d-tupla conteniendo exactamente un elemento para cada X<sub>i</sub>, sujeto a las siguientes restricciones:
+  1) Para cada i ∈ [d], cada x ∈ X<sub>i</sub> puede aparecer en como mucho c(x) tuplas seleccionadas.
+  2) Para cada i ∈ [d], cualquiera de las dos x ∈ X<sub>i</sub> e y ∈ X<sub>i+1</sub> puede aparecer como mucho c(x,y) tuplas seleccionadas. 
+  3) Los valores para c(x) y c(x,y) estan en $\mathbb Z^+$ or $\infty$
+- Notad que solo los pares de objetos adyacentes entre X<sub>i</sub> y X<sub>i+1</sub> estan restringidos.
+
+Hacemos la reducción de GP a la siguiente red $\eta$:
+- V contiene un vértice x, para cada elemento x en cada X<sub>i</sub>, y una copia x' para cada elemento x ∈ X<sub>i</sub> para 1 $\leq$ i < d
+- Añadimos un vértice s y un vértice t
+- Añadimos una arista s → x para cada x ∈ X<sub>1</sub> y añadimos una arista y → t para cada y ∈ X<sub>d</sub>. Dar capacidades c(s,x) = c(x) y c(y,t) = c(y). 
+- Añadir una arista x' → y para cada par x ∈ X<sub>i</sub> e y ∈ X<sub>i+1</sub>. Dar una capacidad c(x,y). Omitir las aristas con capacidades 0.  
+- Para cada x ∈ X<sub>i</sub> de 1 $\leq$ i < d, añadir una arista x → x' con capacidad c(x, x') = c(x).
+
+Cada camino s---->t en $\eta$ identifica una posible d-tupla, sin embargo, cada d-tupla determina un camino s---->t.
+
+- Para resolver GP, construimos $\eta$, y después encontramos un flujo máximo f* entero. 
+- En el subgrafo formado por arista con f*(e)>0, encontramos un camino (s,t) *P* (una d-tupla), decrementamos en 1 el flujo en cada arista de *P*, eliminando aristas con flujo 0. 
+- Repetimos el procedimiento para |f*| veces. En el camino obtemos un conjunto de d-tuplas con tamaño máximo verificando todas las restriccionnes.
+
+#### Problema: Final's scheduling
+
+- n cursos, cada uno con un final. Cada examen debe ser dado en una habitación. Cada curso c<sub>i</sub> tiene E[i] estudiantes. 
+- r habitaciones. Cada r<sub>j</sub> tiene capacidad S[j]. 
+- $\tau$ unidades de tiempo. Para cada habitación y unidad de tiempo, solo podemos asignar un final. 
+- p profesores para vigilar exámenes. Cada examen necesita un profesor en cada clase y tiempo. Cada profesor tiene sus restricciones y disponibilidades y ningún profesor puede vigilar más de 6 finales. Para cada p<sub>l</sub> y $\tau$<sub>k</sub> definir una variable booleana A[k,l] = T si p<sub>l</sub> es disponible en $\tau$<sub>k</sub>.
+
+Diseñar un algoritmo eficiente que programa correctamente una habitación, un rango de tiempo y un profesor para cada final, o reporta que no hay asignación posible. 
+
+**Construcción de la red:**
+
+Construimos una red $\eta$ con vértices {s, t, {c<sub>i</sub>}, {r<sub>j</sub>}, {$\tau$<sub>k</sub>}, {p<sub>l</sub>}}. Aristas y capacidades:
+- (s, c<sub>i</sub>) con capacidad 1 (cada curso tiene un final)
+- (c<sub>i</sub>, r<sub>j</sub>), si E[i] $\leq$ S[j] con capacidad $\infty$
+- $\forall$ j, k (r<sub>j</sub>, $\tau$<sub>k</sub>), con capacidad 1 (un final por habitación y tiempo)
+- ($\tau$<sub>k</sub>, p<sub>l</sub>), si A[k,l] = T, capacidad 1 (p puede vigilar un examen si p esta disponible en $\tau<sub>k</sub>$)
+- (p<sub>l</sub>, t), capacidad 6 (cada p puede vigilar 6 o menos finales)
+
+Nótese que ni las habitaciones ni los tiempos tienen restricciones individuales.
+
+- El tamaño de la entrada es: N = n + r + $\tau$ + p + 2 y el tamaño de la red es O(N) vértices y O(N<sup>2</sup>) aristas. 
+- Cada camino s---->t es una asignación de habitación-tiempo-profesor al final.
+- Cada flujo entero identifica una colección de |*f*| (s, t)-caminos guiando a una asignación valido para |*f*| finales y viceversa. 
+- Para maximizar el tiempo de finales dados, computamos el flujo máximo *f* * de s a t. 
+- Si |*f* *| = n, entonces podemos programar todos los finales, sino no. 
+- Para recuperar la asignación tenemos que considerar las aristas con flujo positivo y extraer la asignación de los n (s,t)-caminos. 
+- Complejidad: 
+  1) Construir $\eta$, tiempo O(N<sup>2</sup>)
+  2) Como |*f* *| $\leq$ n enteros, podemos utilizar Ford-Fulkerson para computar *f* * con coste O(nN<sup>2</sup>)
+  3) La segunda parte requiere O(N<sup>2</sup>). 
+  4) El coste del algoritmo es: O(nN<sup>2</sup>) = O(n(n + r + $\tau$ + p)<sup>2</sup>)
