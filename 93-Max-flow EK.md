@@ -19,7 +19,6 @@ Para $\eta$ = (V, E, c, s, t) y un flujo *f* en $\eta$, asumimos Gf tiene un cam
 
 - El camimo de s a t en un BFS empezando en s, es un camino s--->t con mínimo número de aristas. 
 - Para v ∈ V, $\delta$ <sub>f</sub>(s,v) denota la longitud del camino mínimo de s a v en G<sub>f</sub>
--
 
 **Algunas propiedades de G<sub>f</sub> y G'<sub>f</sub>**
 
@@ -31,18 +30,18 @@ En cualquier de los dos casos, el aumento debe modificar v a u de manera que (u,
 
 **Lema:**
 
-Si el algoritmo EK se ejecuta en $\eta$ = (V, E, c, s, t), para todos los vertices v $\noteq$ s, $\delta<sub>f</sub>(s,v) crece monótonamente con cada flujo de aumento$
+Si el algoritmo EK se ejecuta en $\eta$ = (V, E, c, s, t), para todos los vertices v $\neq$ s, $\delta$<sub>f</sub>(s,v) crece monótonamente con cada flujo de aumento
 
 *Demostración: por reducción al absurdo*
 
-Sea *f* el primer flujo tal que para alguna u $\noteq$ s,
+Sea *f* el primer flujo tal que para alguna u $\neq$ s,
 
-$\delta<sub>f'</sub>(s,u) < $\delta<sub>f</sub>(s,u)
+$\delta$<sub>f'</sub>(s,u) < $\delta<sub>f</sub>(s,u)
 
-Sea v el vértice con minímo $\delta<sub>f'</sub>(s,v) cuya distancia es disminuida.
+Sea v el vértice con minímo $\delta$<sub>f'</sub>(s,v) cuya distancia es disminuida.
 
 - Sea P: s--->u → v el camino con longitud menor de s a v en G<sub>f'</sub>
-- Entonces, $\delta<sub>f'</sub>(s,v) = $\delta<sub>f'</sub>(s,u) + 1 y $\delta<sub>f'</sub>(s,u) $\geq$ $\delta<sub>f</sub>(s,u)
-- Si (u,v) ∈ E<sub>f</sub>, $\delta<sub>f</sub>(s,v) $\leq$ $\delta<sub>f'</sub>(s,u) + 1 = $\delta<sub>f'</sub>(s,v)
+- Entonces, $\delta$<sub>f'</sub>(s,v) = $\delta$<sub>f'</sub>(s,u) + 1 y $\delta$<sub>f'</sub>(s,u) $\geq$ $\delta$<sub>f</sub>(s,u)
+- Si (u,v) ∈ E<sub>f</sub>, $\delta$<sub>f</sub>(s,v) $\leq$ $\delta$<sub>f'</sub>(s,u) + 1 = $\delta$<sub>f'</sub>(s,v)
 - Entonces, (u,v) $\notin$ E<sub>f</sub>,
 
