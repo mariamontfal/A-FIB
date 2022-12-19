@@ -41,3 +41,30 @@ Como todos los vértices en *L*<sub>2</sub>, *R*<sub>1</sub> tienen al menos un 
 *cut(S, T)* $\geq$ |*L*<sub>3</sub> | + |*L*<sub>2</sub> | + |*L*<sub>1</sub> | ≥ |*L*|
 
 Siempre hay un matching de tamaño |*L*| en un grafo bipartido d-regular y como |*L*| = |*R*| este matching es perfecto.
+
+### Project selection
+
+Tenemos un conjunto de proyectos con prerequisitos entre ellos.
+- Conjunto de possibles proyectos *P*: proyecto v tiene un beneficio asociado p<sub>v</sub> (positivo o negativo)
+- Conjunto de prerequisitos *E*: (v,w) ∈ *E* significa w es un prerequisito de v. 
+- Un subconjunto de proyectos A ⊆ P es factible si el prerequisito de cada proyecto en A también pertenece a A. 
+
+Problema de selección de proyecto: dado un conjunto de proyectos *P* y unos prerequisitos *E*, escoger el subconjunto de proyectos factible que maximizan el beneficio. 
+
+**Red de flujo:**
+
+- Añadir vértices *s* y *t* a (P,E)
+  -  Asignar capacidad de $\infty$ a cada arista de prerequisito. 
+  - Añadir aristas (s,v) con capacidad p<sub>v</sub> si p<sub>v</sub> > 0
+  - Añadir aristas (v,t) con capacidad -p<sub>v</sub> si p<sub>v</sub> < 0
+  - Por convenio, definir p<sub>s</sub> = p<sub>t</sub> = 0
+  
+*Claim:*
+
+(A,B) es un corte mínimo si y solo si A - {s} es un conjunto óptimo de proyectos. 
+- En un corte mínimo, las aristas con capacidades infinito aseguran A-{s} es factible. 
+- Para ver si es una solución óptima, analizamos el corte-(s,t) genérico. 
+
+cut(A,B) = $\Sigma$<sub>v ∈ B:p<sub>v</sub> > 0</sub> p<sub>v</sub>+ $\Sigma$<sub>v∈A:p<sub>v</sub> < 0 </sub> (−p<sub>v</sub>)
+= $\Sigma$<sub>v ∈ B:p<sub>v</sub> > 0</sub> p<sub>v</sub> + $\Sigma$ <sub>v∈A:p<sub>v</sub> > 0 </sub> p<sub>v</sub> − $\Sigma$ <sub>v∈A:p<sub>v</sub> > 0 </sub> p<sub>v</sub> − $\Sigma$ <sub>v∈A:p<sub>v</sub> < 0 </sub> p<sub>v</sub>
+= $\Sigma$<sub>v∈P:p<sub>v</sub> > 0 </sub> p<sub>v</sub> − $\Sigma$ <sub>v∈A </sub> p<sub>v</sub>
