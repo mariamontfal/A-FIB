@@ -170,4 +170,131 @@ Construímos $\eta$ = (V', E', c, l) desde G según lo siguiente:
   - Para i $\in$ C, l(s,i) = c<sub>i</sub> y c(s,i) = el número de productos comprados. 
   - Para j $\in$ P, l(j,t) = p<sub>j</sub> y c(j,t) = número de clientes que compran j.
   - Para (i,j) $\in$ E, c(i,j) = 1 y l(i,j) = 0
+  
+Si f es una circulación en $\eta$:
+- Una unidad de flujo circula: s → i → j → t → s
+- f(i,j) = 1 significa que el cliente i pide el producto j
+- f(s,i) es el número de productos que el cliente i pide
+- f(j,t) es el número de clientes que piden el producto j
+- f(t,s) es el número total de productos servidos
 
+**Teorema:**
+
+$\eta$ tiene una circulación si y solo si hay un camino factible para diseñar la encuesta. 
+
+*Demostración:*
+Si existe un camino factible:
+- Si i pregunta sobre j entonces f(i,j) = 1
+- f(s,i) = número de preguntas pregunntadas a i ($\geq$ c<sub>i</sub>)
+- f(j,t) = número de clientes que han sido preguntados sobre j ($\geq$ d<sub>j</sub>)
+- f(t,s) = número total de preguntas
+- fácil de verificar que f es una circulación en $\eta$
+Si existe un circulación entera en $\eta$:
+- si f(i,j) = 1 entonces i pregunta sobre j
+- las restricciones satisfacen la regla de la capacidad
+
+*Coste del algoritmo:*
+- $\eta$ tiene N = n + m + 2 vértices y E = n + m + nm aristas
+- L = $\Sigma$ <sub> e </sub> l(e) $\leq$ nm
+- Obtener $\eta$ y extraer la informaciónn de la circulación tiene coste O(nm)
+- FF análisis, el coste de obtener la circulación O(L(N+M)) = O(n<sup>2</sup>m<sup>2</sup>)
+- EK análisis, el coste de obtener la circulación O(NM(N+M)) = O((n+m) n<sup>2</sup> m<sup>2</sup>)
+- El algoritmo tiene coste O(n<sup>2</sup> m<sup>2</sup>)
+
+## Redondeo con restricciones
+
+Consideramos una matriz A = (a<sub>ij</sub>) con dimennsiones n x n, donde cada a<sub>ij</sub> $\in$ $\mathbb{R}^+$ ∪ {0} y donde la suma de cada fila y columna de A es un entero. Queremos redondear cada valor de a<sub>ij</sub> en ⌊a<sub>ij</sub>⌋ o ⌈a<sub>ij</sub>⌉ sin modificar la suma de las filas/columnas. 
+
+El problema consiste en dada unna matriz A, producir un algoritmo eficiente para determinar si es posible redondear A i, si es posible, producir la matriz redondeada. 
+
+Demostrar la correctitud del algoritmo e indicar la complejidad. 
+
+Notamos que: 
+- Los elementos de A que son enteros no se deben modificar. 
+- Sea r<sub>i</sub> = $\Sigma$<sub>j=1</sub><sup> n </sup> (a<sub>ij</sub> - ⌊a<sub>ij</sub>⌋) i c<sub>j</sub> = $\Sigma$<sub>j=1</sub><sup> n </sup> (a<sub>ij</sub> - ⌊a<sub>ij</sub>⌋)
+- Si las filas y columnas de A suman un entero, entonces r<sub>i</sub> i c<sub>j</sub> son enteros. 
+- Además $\Sigma$r<sub>i</sub> = $\Sigma$c<sub>j</sub>
+
+Para resolver el problema haremos una reducción de este problema a uno de circulación. 
+Una unidad de flujo la podemos interpretar como la parte decimal que se redondea a 1.
+
+Construir una red con demandas $\eta$ = (V, E, c, d) donde:
+- Vértices: V = {x<sub>i</sub>, y<sub>i</sub> | 1 $\leq$ i $\leq$ n}. Los vértices x representan las filas y los y las columnas. 
+- Aristas: E = {x<sub>i</sub>, y<sub>j</sub> | 1 $\leq$ i,j $\leq$ n} i a<sub>ij</sub> $\notin$ $\mathbb{Z}$.
+- Capacidades: c(x<sub>i</sub>, y<sub>j</sub>) = 1
+- Demandas: d(x<sub>i</sub>) = -r<sub>i</sub>, 1 $\leq$ i $\leq$ n, i d(y<sub>j</sub>) = c<sub>j</sub>
+
+$\eta$ tiene O(n) vértices i O(n<sup>2</sup>) aristas. 
+
+Si existe un redondeo de A, $\eta$ tiene una circulación con valores enteros (0,1)
+- Sea B un redondeo de A, definimos una nueva matriz D donde
+  d<sub>ij</sub> = 1 si b<sub>ij</sub> > a<sub>ij</sub>
+  d<sub>ij</sub> = 0 sino
+- Como B es un redondeo $\Sigma$d<sub>ij</sub> = $\Sigma$r<sub>i</sub> y  $\Sigma$d<sub>ij</sub> = $\Sigma$c<sub>i</sub>
+- Entonces, el flujo f(i,j) = d<sub>ij</sub> es una circulación en $\eta$
+
+Si $\eta$ tiene una circulación con valores enteros (0,1), existe un redondeo de A. 
+- Sea f una circulación en $\eta$
+- Definimos la matriz B como
+  b<sub>i,j</sub> = a<sub>ij</sub> si a<sub>ij</sub> $\in$ $\mathbb{Z}$
+  b<sub>i,j</sub> = ⌈a<sub>ij</sub>⌉ si a<sub>ij</sub> $\notin$ $\mathbb{Z}$ y f(i,j) = 1
+  b<sub>i,j</sub> = ⌊a<sub>ij</sub>⌋ sino
+- Como f es una circulación: 
+$\Sigma$<sub>j</sub>b<sub>ij</sub> = $\Sigma$<sub>j</sub>a<sub>ij</sub> y $\Sigma$<sub>i</sub>b<sub>ij</sub> = $\Sigma$<sub>i</sub>a<sub>ij</sub> 
+- Entonces , B es un redondeo válido para A
+
+La construcción de $\eta$ tiene una complejidad de O(n<sup>2</sup>)
+FF funciona en O(D|E|) donde D es la suma de las demandas positivas, por ejemplo, D = $\Sigma$r<sub>i</sub> = O(n<sup>2</sup>) y como |E| = O(n<sup>2</sup>), el número total de pasos es O(n<sup>4</sup>)
+
+## Segmentación de imagenes
+
+- En las imágenes digitales, un pixel es el elemento más pequeño controlable en la imagen representada en una pantalla. 
+- Las imagenes son representadas por un rasterizador gráfico de imagenes, una estructura de datos matricial de puntos representando una graella rectangular de pixels o puntos de color. 
+- Las direcciones de los pixeles corresponden a sus coordenadas físicas. 
+- Deseamos etiquetar cada pixel como pertenenciente al primer plannno o al fondo. 
+- Los pixeles de imagen como una cuadrícula de puntos. 
+- Definimos un grafo no dirigido G = (V,E) donde V = conjunto de pixeles en la imagen y E = pares de pixeles vecinnos (en la cuadrícula). 
+
+Información:
+- Para cada pixel i, a<sub>i</sub> $\geq$ 0 es la estimación de i de que este en primer plano y b<sub>i</sub> $\geq$ 0 es la estimación de que i esté en el fondo. 
+- Para cada (i,j) de los pixeles vecinos, existe una penalización de separación p<sub>ij</sub> $\geq$ 0 para colocar uno en primer plano y otro en el fondo. 
+
+*Objetivos:*
+- Para i isolado, si a<sub>i</sub> > b<sub>i</sub> preferimos etiquetar i como primer plano (sino como fondo). 
+- Si muchos vecinos de i son etiquetas como fondo, preferimos etiquetar i como fondo. Esto hace el etiquetado i más suave minimizando el total primer plano / fondo. 
+
+Queremos una partición V en A (conjunto de pixeles de primer plano) y B (conjunto de pixeles de fondo), tal que queremos maximizar la función objetivo:
+
+$\Sigma$<sub>i $\in$ A</sub>a<sub>i</sub> + $\Sigma$<sub>j $\in$ B</sub>b<sub>j</sub> - $\Sigma$<sub>{(i,j) $\in$ E, i $\in$ A, j $\in$ B </sub>p<sub>ij</sub>
+
+La segmentación tiene parecido a un problema de corte pero:
+- Es una maximización diferente a la de min-cut
+- G es no dirigido
+- No tiene vértices s ni t (pero los podemos añadir)
+- Sea Q = $\Sigma$<sub>i $\in$ V</sub> (a<sub>i</sub> + b<sub>i</sub>) entonces:
+$\Sigma$<sub>i $\in$ A</sub>a<sub>i</sub> + $\Sigma$<sub>j $\in$ B</sub>b<sub>j</sub> = Q - $\Sigma$<sub>i $\in$ A</sub>b<sub>i</sub> + $\Sigma$<sub>j $\in$ B</sub>a<sub>j</sub>
+- Es equivalente a maximixar: $\Sigma$<sub>i $\in$ A</sub>b<sub>i</sub> + $\Sigma$<sub>j $\in$ B</sub>a<sub>j</sub> + $\Sigma$<sub>{(i,j) $\in$ E, i $\in$ A, j $\in$ B </sub>p<sub>ij</sub>
+
+Transformamos G = (V, E) en $\eta$ = (V', E', c, s, t):
+- Añadiendo un nodo s para representar el primer plano
+- Añadiendo un nodo t para representar el fondo
+- V' = V ∪ {s,t}
+- Para cada (v,u) $\in$ E creamos aristas dirigidas antiparalelas (u,v) y (v,u) en E'
+- Para cada pixel i creamos aristas dirigidas (s,i) y (i,t)
+- E' = {(s,v) ∪ (v,t)}<sub>v$\in$ E</sub> ∪ {(u,v) ∪ (v,u)}<sub>(u,v)$\in$E</sub>
+
+Para cada i $\in$ V, c(s,i) = a<sub>i</sub>, c(i,t) = b<sub>i</sub>
+Para cada (i,j) $\in$ E, c(i,j) = c(j,i) = p<sub>ij</sub>
+
+Un (s,t) - corte (A',B') corresponde a la partición de los pixeles en (A,B) para A = A'- {s} y B = B' - {t}
+- Una arista (s,j) con j $\in$ B contribuye con a<sub>j</sub> en c(A', B')
+- Una arista (i,t) donde i $\in$ A contribuye con b<sub>j</sub> en c(A',B')
+- Una arista (i,j) donde i $\in$ A y j $\in$ B contribuyen con p<sub>ij</sub> en c(A',B')
+
+Entonces, 
+
+c(A',B') = $\Sigma$<sub>i $\in$ A</sub>b<sub>i</sub> + $\Sigma$<sub>j $\in$ B</sub>a<sub>j</sub> + $\Sigma$<sub>{(i,j) $\in$ E, i $\in$ A, j $\in$ B </sub>p<sub>ij</sub>
+
+Queremos encontrar un corte con unn valor mínimo en la cantidad anterior, el cual es el equivalente al problema del corte mínimo en $\eta$
+
+El coste del algoritmo está determinado por el coste de encontrar un corte mínimo en la red asociada, por ejemplo, como los dos vértices y las aristas son O(nm), el coste del algoritmo es O((nm)<sup>3</sup>)
