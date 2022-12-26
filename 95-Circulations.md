@@ -170,3 +170,4 @@ Construímos $\eta$ = (V', E', c, l) desde G según lo siguiente:
   - Para i $\in$ C, l(s,i) = c<sub>i</sub> y c(s,i) = el número de productos comprados. 
   - Para j $\in$ P, l(j,t) = p<sub>j</sub> y c(j,t) = número de clientes que compran j.
   - Para (i,j) $\in$ E, c(i,j) = 1 y l(i,j) = 0
+
