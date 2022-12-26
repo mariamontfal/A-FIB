@@ -27,3 +27,21 @@ Dada una red $\eta$ = (V, E, c, d) con c > 0, obtener la circulación si existe.
 **Condiciones para que exista circulación:**
 1) $\Sigma$ <sub> v $\in$ V </sub> d(v) =  $\Sigma$ <sub> v $\in$ V </sub> ( $\Sigma$ <sub> (u,v) $\in$ E </sub> f(u,v) - $\Sigma$ <sub> (v,z) $\in$ E </sub> f(v,z)) 
 
+Para e = (u,v) $\in$ E, f(e) aparece en la suma de las aristas a v y en la suma de las aristas que salen de u. Los dos términos se cancelan.
+
+Entonces tenemos que si existe una circulación: $\Sigma$ <sub> v $\in$ V </sub> d(v) = 0
+
+Recordemos que:
+- S = {v $\in$ V | d(v) < 0} y
+- T = {v $\in$ V | d(v) > 0}
+
+Definimos D = - $\Sigma$ <sub> v $\in$ S </sub> d(v) = $\Sigma$ <sub> v $\in$ T </sub> d(v). 
+
+D es el total de flujo extra que es transporta desde las fuentes hasta los sumideros. 
+
+De $\eta$ = (V, E, c, d) definimos la red de flujo $\eta$' = (V', E', c', s, t):
+
+- V' = V ∪ {s,t}, añadimos una fuente s y un sumidero t. 
+- Para v $\in$ S (d(v) < 0), añadimos (s,v) con capacidad -d(v)
+- Para v $\in$ T (d(v) > 0), añadimos (v,t) con capacidad d(v)
+- Mantenemos E y, para e $\in$ E, c'(e) = c(e)
