@@ -1,4 +1,4 @@
-### Edmonds Karg algorithm
+### Edmonds Karp algorithm
 
 Escoger un buen camino de aumento guía para un algoritmo más rápido. 
 
